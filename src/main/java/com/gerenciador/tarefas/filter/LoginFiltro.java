@@ -32,16 +32,16 @@ public class LoginFiltro extends AbstractAuthenticationProcessingFilter {
 
         return getAuthenticationManager()
                 .authenticate(new UsernamePasswordAuthenticationToken(
-                        usuarioAutenticado.getUserName(),
+                        usuarioAutenticado.getUsername(),
                         usuarioAutenticado.getPassword(),
                         Collections.emptyList()
                 ));
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        super.successfulAuthentication(request, response, chain, authResult);
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
+        super.successfulAuthentication(request, response, chain, authentication);
 
-        AutenticacaoService.addJWTToken(response, authResult.getName());
+        AutenticacaoService.addJWTToken(response, authentication);
     }
 }
