@@ -1,5 +1,6 @@
 package com.gerenciador.tarefas.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.gerenciador.tarefas.permissoes.PermissaoEnum;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -11,9 +12,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "roles")
-// Gerando Getters e Setters via Lombok
 @Data
-@Getter
+@Getter // Gerando Getters e Setters via Lombok
 @Setter
 public class Role implements Serializable {
     @Id
@@ -25,5 +25,6 @@ public class Role implements Serializable {
     private PermissaoEnum nome;
 
     @ManyToMany(mappedBy = "roles" )
+    @JsonBackReference
     private List<Usuario> usuarios;
 }

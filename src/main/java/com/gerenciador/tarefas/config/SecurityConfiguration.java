@@ -38,20 +38,22 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws  Exception {
+
         http.csrf(crsf -> crsf.disable())
-                .authorizeHttpRequests(auth -> {
-                   auth.requestMatchers("/login").permitAll()
-                           .requestMatchers(HttpMethod.GET, "/teste-api").permitAll()
-                           .requestMatchers(HttpMethod.GET, "/teste-api-bem-vindo").hasAnyAuthority(PermissaoEnum.ADMINISTRADOR.toString())
-                           .requestMatchers(HttpMethod.GET, "/usuarios").hasAnyAuthority(PermissaoEnum.USUARIO.toString())
-                           .requestMatchers(HttpMethod.POST, "/usuarios").hasAnyAuthority(PermissaoEnum.ADMINISTRADOR.toString())
-                           .anyRequest()
-                           .authenticated();
+                .authorizeHttpRequests( auth -> {
+                    auth.requestMatchers("/login").permitAll()
+                            .requestMatchers(HttpMethod.GET, "/teste-api").permitAll()
+                            .requestMatchers(HttpMethod.GET, "/teste-api-bem-vindo").hasAuthority(PermissaoEnum.ADMINISTRADOR.toString())
+                            .requestMatchers(HttpMethod.GET, "/usuarios").hasAuthority(PermissaoEnum.USUARIO.toString())
+                            .requestMatchers(HttpMethod.POST, "/usuarios").hasAuthority(PermissaoEnum.ADMINISTRADOR.toString())
+                            .anyRequest()
+                            .authenticated();
                 });
 
         http.addFilterBefore(new LoginFiltro("/login", authenticationConfiguration.getAuthenticationManager()), UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(new AutenticacaoFiltro(), UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
 }

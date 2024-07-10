@@ -8,10 +8,10 @@
 		<version>3.3.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.gerenciador.tarefas</groupId>
-	<artifactId>gerenciador.tarefas</artifactId>
+	<groupId>com.gerenciador-tarefas</groupId>
+	<artifactId>gerenciador-tarefas</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>gerenciador.tarefas</name>
+	<name>gerenciador-tarefas</name>
 	<description>Aplicativo simples para gerênciar tafefas, onde os usuários podem, visualizar e excluir tarefas de sua lista pessoal.</description>
 	<properties>
 		<java.version>17</java.version>
@@ -65,6 +65,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+			<version>3.1.1</version>
 		</dependency>
 
 		<dependency>

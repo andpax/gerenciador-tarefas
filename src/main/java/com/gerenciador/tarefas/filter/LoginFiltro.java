@@ -39,9 +39,7 @@ public class LoginFiltro extends AbstractAuthenticationProcessingFilter {
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
-        super.successfulAuthentication(request, response, chain, authentication);
-
-        AutenticacaoService.addJWTToken(response, authentication);
+    protected void successfulAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain, Authentication authentication) {
+        AutenticacaoService.addJWTToken(httpServletResponse, authentication);
     }
 }

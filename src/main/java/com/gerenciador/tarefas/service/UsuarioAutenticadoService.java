@@ -22,12 +22,12 @@ public class UsuarioAutenticadoService implements UserDetailsService {
 
     public UserDetails loadUserByUsername(String username) {
         Usuario usuario = iUsuarioRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Usuário ".concat(username).concat(" não foi encontrado")));
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário " + username + " não foi encontrado"));
 
         List<SimpleGrantedAuthority> roles = usuario.getRoles()
                 .stream()
                 .map(role -> new SimpleGrantedAuthority(role.getNome().toString()))
-                .collect(Collectors.toList());
+                .toList();
 
         return new User(usuario.getUsername(), usuario.getPassword(), roles);
     }

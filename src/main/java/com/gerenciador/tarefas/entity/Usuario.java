@@ -10,9 +10,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "usuarios")
-// Gerando Getters e Setters via Lombok
 @Data
-@Getter
+@Getter // Gerando Getters e Setters via Lombok
 @Setter
 public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -24,7 +23,7 @@ public class Usuario implements Serializable {
     @Column(unique = true, length = 50)
     private String username;
 
-    @Column(length = 50)
+    @Column(length = 150)
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

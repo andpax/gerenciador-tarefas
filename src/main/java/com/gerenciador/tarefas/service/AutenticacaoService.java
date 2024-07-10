@@ -15,10 +15,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class AutenticacaoService {
+    private static final String BEARER = "Bearer";
     private static final String HEADER_AUTHORIZATION = "Authorization";
     private static final String JWT_KEY = "signinKey";
     private static final String AUTHORITIES = "authorities";
-    private static final String BEARER = "Bearer";
     private static final int EXPIRATION_TOKEN_ONE_HOUR = 3600000;
 
     static public void addJWTToken(HttpServletResponse response, Authentication authentication) {
@@ -37,8 +37,8 @@ public class AutenticacaoService {
                 .addClaims(clains)
                 .compact();
 
-        response.setHeader(HEADER_AUTHORIZATION, BEARER.concat(" ").concat(jwtToken));
-        response.setHeader("Access-Control-Expose-Headers", HEADER_AUTHORIZATION);
+        response.addHeader(HEADER_AUTHORIZATION, BEARER + " " + jwtToken);
+        response.addHeader("Access-Control-Expose-Headers", HEADER_AUTHORIZATION);
     }
 
     static public Authentication obterAutenticacao(HttpServletRequest request) {
@@ -47,7 +47,7 @@ public class AutenticacaoService {
         if (token != null) {
             Claims user = Jwts.parser()
                     .setSigningKey(JWT_KEY)
-                    .parseClaimsJws(token.replace(BEARER.concat(" "), ""))
+                    .parseClaimsJws(token.replace(BEARER + " ", ""))
                     .getBody();
 
             if (user != null) {
@@ -56,7 +56,7 @@ public class AutenticacaoService {
                         .map(SimpleGrantedAuthority::new)
                         .toList();
 
-                return new UsernamePasswordAuthenticationToken(user, null, null);
+                return new UsernamePasswordAuthenticationToken(user, null, permissoes);
             } else {
                 throw new RuntimeException("Autenticação falhou!");
             }
