@@ -1,0 +1,25 @@
+package com.gerenciador.tarefas.response;
+
+import com.gerenciador.tarefas.status.TarefasStatusEnum;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalTime;
+
+@Getter
+@Setter
+@Builder
+public class ObterTarefasResponse {
+    private Long id;
+    private String titulo;
+    private String descricao;
+    private TarefasStatusEnum status;
+    private String responsavel;
+    private String criador;
+    private int quantidadeHorasEstimadas;
+    private Integer quantidadeHorasRealizadas;
+    private LocalTime dataCadastro;
+    private LocalTime dataAtualizacao;
+
+}

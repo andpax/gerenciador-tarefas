@@ -10,6 +10,6 @@ public class CadastrarTarefaRequest {
     private String titulo;
     private String descricao;
     private Long criadorId;
-    private int quantidadeHorasEstimadas;
+    private Integer quantidadeHorasEstimadas;
 
 }
