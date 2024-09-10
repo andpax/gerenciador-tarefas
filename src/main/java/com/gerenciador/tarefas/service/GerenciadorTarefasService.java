@@ -44,11 +44,11 @@ public class GerenciadorTarefasService {
     }
 
     public Page<Tarefa> obtemTarefasPorTitulo(String titulo, Pageable pageable) {
-        return this.gerenciadorTarefasRepository.findByTituloContaining(titulo, pageable);
+        return this.gerenciadorTarefasRepository.findByTituloContainingOrderByDataAtualizacaoDesc(titulo, pageable);
     }
 
     public Page<Tarefa> obtemTodasTarefas(Pageable pageable) {
-        return this.gerenciadorTarefasRepository.findAll(pageable);
+        return this.gerenciadorTarefasRepository.findAllByDataAtualizacaoDesc(pageable);
     }
 
     public Tarefa atualizarTarefa(Long id, AtulizarTarefaRequest request) {
