@@ -11,4 +11,5 @@ public interface GerenciadorTarefasRepository extends JpaRepository<Tarefa, Long
 
      Page<Tarefa> findByTituloContaining(String titulo, Pageable pageable);
      Page<Tarefa> findAll(Pageable pageable);
+     Tarefa findByTituloOrDescricao(String titulo, String descricao);
 }
